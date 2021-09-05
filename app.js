@@ -25,7 +25,7 @@ app.post('/', function(req, res){
     const email = req.body.Email;
     const password = req.body.Password;
 
-    res.send("<h1> your credentials are <br>Name: " + fname + " " + lname + " <br>Email: " + email + "<br>Password: " + password);
+    // res.send("<h1> your credentials are <br>Name: " + fname + " " + lname + " <br>Email: " + email + "<br>Password: " + password);
 
     var data = {
         members: {
@@ -46,6 +46,16 @@ app.post('/', function(req, res){
         auth: "Siddharth1:188aec22097a9e71503ed61cc68a9fac-us5"
     }
     const request = https.request(url, option, function (response) {
+
+        if(response.statusCode === 200){
+            res.sendFile(__dirname + "/success.html");
+        }
+        else{
+        
+            res.sendFile(__dirname + "/failure.html");
+
+        }
+
         response.on("data", function (data) {
             console.log(JSON.parse(data));
         })
